@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Author Name — Official Site</title>
+<title>Chengyu Cao — Official Site</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;1,9..144,450&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -130,51 +130,123 @@
 
   /* ---------- hero ---------- */
   .hero{
-    background: var(--ink);
+    position: relative;
+    height: 100vh;
+    min-height: 560px;
+    background: #05070c;
     color: var(--text-on-ink);
-    padding: 120px 0 96px;
     overflow: hidden;
-  }
-  .hero .wrap{
-    display:grid;
-    grid-template-columns: 1.15fr .85fr;
-    gap: 64px;
+    display:flex;
     align-items:center;
+    justify-content:center;
+  }
+  .hero-bg{
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .hero-bg-layer{
+    position: absolute;
+    inset: -3%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    animation: heroSlide 30s ease-in-out infinite;
+    will-change: opacity, transform;
+  }
+  .hero-bg-layer.milkyway{
+    background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/ESO_-_Milky_Way.jpg?width=2200');
+    animation-delay: 0s;
+  }
+  .hero-bg-layer.pillars{
+    background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/Pillars_of_Creation_%28NIRCam_Image%29.jpg?width=2200');
+    animation-delay: -10s;
+  }
+  .hero-bg-layer.blackhole{
+    background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/Black_hole_-_Messier_87_crop_max_res.jpg?width=2200');
+    animation-delay: -20s;
+  }
+  @keyframes heroSlide{
+    0%    { opacity: 0;   transform: scale(1); }
+    4%    { opacity: 1; }
+    30%   { opacity: 1;   transform: scale(1.09); }
+    34%   { opacity: 0;   transform: scale(1.1); }
+    100%  { opacity: 0;   transform: scale(1.1); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero-bg-layer{ animation: none; opacity:0; }
+    .hero-bg-layer.milkyway{ opacity: 1; }
+  }
+  .hero-overlay{
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      radial-gradient(ellipse at 50% 40%, rgba(6,9,18,.25) 0%, rgba(5,7,12,.55) 55%, rgba(5,7,12,.82) 100%),
+      linear-gradient(to bottom, rgba(5,7,12,.35) 0%, rgba(5,7,12,.15) 30%, rgba(5,7,12,.65) 100%);
+  }
+  .hero-inner{
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 24px;
+    will-change: opacity, transform;
   }
   .hero-eyebrow{
     font-size: .85rem;
-    color: #b7ad95;
-    margin-bottom: 18px;
+    color: #9aa4c4;
+    margin-bottom: 22px;
     opacity:0;
-    transform: translateY(10px);
-    animation: rise .7s ease forwards .1s;
+    animation: fadein 1.4s ease forwards .2s;
   }
   h1.title{
     font-family: var(--serif);
     font-weight: 450;
-    font-size: clamp(2.6rem, 5vw, 4.3rem);
+    font-size: clamp(3rem, 8vw, 6.4rem);
     line-height: 1.04;
-    letter-spacing: -0.01em;
+    letter-spacing: 0.01em;
+    color: #f5f1e6;
     opacity:0;
-    transform: translateY(14px);
-    animation: rise .8s ease forwards .22s;
+    animation: fadein 1.8s ease forwards .1s;
   }
   .hero-sub{
-    margin-top: 22px;
+    margin: 26px auto 0;
     max-width: 46ch;
-    color: #cfc7b2;
+    color: #b9c0d6;
     font-size: 1.05rem;
     opacity:0;
-    transform: translateY(14px);
-    animation: rise .8s ease forwards .38s;
+    animation: fadein 1.4s ease forwards .7s;
   }
   .hero-cta{
-    margin-top: 34px;
+    margin-top: 38px;
     display:flex;
     gap: 18px;
+    justify-content:center;
     opacity:0;
-    transform: translateY(14px);
-    animation: rise .8s ease forwards .52s;
+    animation: fadein 1.4s ease forwards 1s;
+  }
+  .scroll-hint{
+    position:absolute;
+    left:50%;
+    bottom: 34px;
+    transform: translateX(-50%);
+    z-index:2;
+    font-size: .75rem;
+    color: #8b93b3;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    opacity:0;
+    animation: fadein 1.2s ease forwards 1.4s;
+  }
+  .scroll-hint::after{
+    content:"";
+    width:1px; height: 28px;
+    background: linear-gradient(#8b93b3, transparent);
+  }
+  @keyframes fadein{
+    to{ opacity:1; }
   }
   .btn{
     display:inline-block;
@@ -184,63 +256,36 @@
     font-weight: 500;
     text-decoration:none;
     border-radius: 2px;
-    transition: transform .25s ease, background .25s ease;
+    transition: transform .25s ease, background .25s ease, box-shadow .3s ease, border-color .3s ease;
   }
   .btn-primary{
     background: var(--oxblood);
     color: #f3eee2;
+    box-shadow: 0 0 0 1px rgba(201,102,102,.5), 0 0 16px 2px rgba(180,70,70,.45);
+    animation: glowPulse 3.4s ease-in-out infinite;
   }
-  .btn-primary:hover{ transform: translateY(-2px); background:#8c3737; }
+  .btn-primary:hover{
+    transform: translateY(-2px);
+    background:#8c3737;
+    box-shadow: 0 0 0 1px rgba(224,140,140,.75), 0 0 30px 8px rgba(180,70,70,.75);
+    animation-play-state: paused;
+  }
+  @keyframes glowPulse{
+    0%, 100%{ box-shadow: 0 0 0 1px rgba(201,102,102,.5), 0 0 16px 2px rgba(180,70,70,.45); }
+    50%{ box-shadow: 0 0 0 1px rgba(224,140,140,.7), 0 0 26px 6px rgba(180,70,70,.65); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .btn-primary{ animation: none; }
+  }
   .btn-ghost{
-    border: 1px solid #4a5148;
+    border: 1px solid rgba(183,173,149,.55);
     color: var(--text-on-ink);
+    box-shadow: 0 0 12px 1px rgba(183,173,149,.18);
   }
-  .btn-ghost:hover{ border-color:#b7ad95; transform: translateY(-2px); }
-
-  @keyframes rise{
-    to{ opacity:1; transform: translateY(0); }
-  }
-
-  /* book jacket illustration made with CSS */
-  .jacket-wrap{
-    display:flex;
-    justify-content:center;
-    opacity:0;
-    animation: rise 1s ease forwards .3s;
-  }
-  .jacket{
-    width: 230px;
-    height: 340px;
-    background: linear-gradient(160deg, #2b3a30, #17211c 70%);
-    border: 1px solid #46503f;
-    position:relative;
-    box-shadow: -18px 18px 0 -2px rgba(0,0,0,.25), 0 30px 60px rgba(0,0,0,.35);
-  }
-  .jacket::before{
-    content:"";
-    position:absolute;
-    left: 14px; top:14px; right:14px; bottom:14px;
-    border: 1px solid rgba(183,173,149,.35);
-  }
-  .jacket-title{
-    position:absolute;
-    top: 44%;
-    left: 24px; right:24px;
-    transform: translateY(-50%);
-    font-family: var(--serif);
-    font-size: 1.4rem;
-    line-height:1.15;
-    color: #ece7da;
-    text-align:center;
-  }
-  .jacket-author{
-    position:absolute;
-    bottom: 26px;
-    left:24px; right:24px;
-    text-align:center;
-    font-size: .72rem;
-    letter-spacing: .08em;
-    color: #b7ad95;
+  .btn-ghost:hover{
+    border-color:#e4dcc3;
+    transform: translateY(-2px);
+    box-shadow: 0 0 22px 4px rgba(228,220,195,.4);
   }
 
   /* ---------- section shell ---------- */
@@ -437,8 +482,6 @@
   }
 
   @media (max-width: 860px){
-    .hero .wrap{ grid-template-columns: 1fr; }
-    .jacket-wrap{ order:-1; }
     .bio{ grid-template-columns: 1fr; }
     .shelf{ grid-template-columns: 1fr; }
     .contact-box{ grid-template-columns: 1fr; padding: 40px 24px; }
@@ -459,7 +502,7 @@
 
 <header>
   <nav class="wrap">
-    <div class="brand">Author Name</div>
+    <div class="brand">Chengyu Cao</div>
     <ul class="nav-links">
       <li><a href="#bio">Bio</a></li>
       <li><a href="#books">Books</a></li>
@@ -468,24 +511,23 @@
   </nav>
 </header>
 
-<section class="hero">
-  <div class="wrap">
-    <div>
-      <div class="hero-eyebrow">New novel out this fall</div>
-      <h1 class="title">Stories set in the quiet<br>between decisions.</h1>
-      <p class="hero-sub">Author Name writes literary fiction about memory, migration, and the small rooms people build inside big lives. Four novels. One recurring question: what do we owe the versions of ourselves we left behind?</p>
-      <div class="hero-cta">
-        <a href="#books" class="btn btn-primary">See the books</a>
-        <a href="#contact" class="btn btn-ghost">Get in touch</a>
-      </div>
-    </div>
-    <div class="jacket-wrap">
-      <div class="jacket">
-        <div class="jacket-title">The Long<br>Way Back</div>
-        <div class="jacket-author">AUTHOR NAME</div>
-      </div>
+<section class="hero" id="hero">
+  <div class="hero-bg" id="heroBg">
+    <div class="hero-bg-layer milkyway"></div>
+    <div class="hero-bg-layer pillars"></div>
+    <div class="hero-bg-layer blackhole"></div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-inner" id="heroInner">
+    <div class="hero-eyebrow">New novel out this fall</div>
+    <h1 class="title">Chengyu Cao</h1>
+    <p class="hero-sub">Literary fiction about memory, migration, and the small rooms people build inside big lives.</p>
+    <div class="hero-cta">
+      <a href="#books" class="btn btn-primary">See the books</a>
+      <a href="#contact" class="btn btn-ghost">Get in touch</a>
     </div>
   </div>
+  <div class="scroll-hint">Scroll</div>
 </section>
 
 <section id="bio">
@@ -495,8 +537,8 @@
       <div class="section-head" style="border:none; padding:0; margin-bottom:24px;">
         <h2 class="section-title">About the author</h2>
       </div>
-      <p>Author Name grew up between two coastlines, which may explain why so much of the work returns to the idea of leaving. Trained first as a journalist, the shift into fiction came from wanting to sit longer with the questions the news cycle moved past too quickly.</p>
-      <p>Their debut novel was named a best book of the year by three major outlets and has been translated into twelve languages. When not writing, Author Name teaches a small fiction workshop and spends an unreasonable amount of time rearranging the same bookshelf.</p>
+      <p>Chengyu Cao grew up between two coastlines, which may explain why so much of the work returns to the idea of leaving. Trained first as a journalist, the shift into fiction came from wanting to sit longer with the questions the news cycle moved past too quickly.</p>
+      <p>Their debut novel was named a best book of the year by three major outlets and has been translated into twelve languages. When not writing, Chengyu Cao teaches a small fiction workshop and spends an unreasonable amount of time rearranging the same bookshelf.</p>
       <div class="facts">
         <div>
           <div class="fact-label">Based in</div>
@@ -554,9 +596,9 @@
         <h2>Get in touch</h2>
         <p>For events, press, foreign rights, or just to say the last chapter wrecked you — reach out directly or use the form.</p>
         <ul class="contact-list">
-          <li><span class="k">Email</span><a href="mailto:hello@authorname.com">hello@authorname.com</a></li>
+          <li><span class="k">Email</span><a href="mailto:hello@chengyucao.com">hello@chengyucao.com</a></li>
           <li><span class="k">Agent</span><span>Represented by Marlowe Lit</span></li>
-          <li><span class="k">Instagram</span><a href="#">@authorname</a></li>
+          <li><span class="k">Instagram</span><a href="#">@chengyucao</a></li>
         </ul>
       </div>
       <form class="inquire" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Sent';">
@@ -570,7 +612,7 @@
 </section>
 
 <footer>
-  &copy; 2026 Author Name. All rights reserved.
+  &copy; 2026 Chengyu Cao. All rights reserved.
 </footer>
 
 <script>
@@ -608,6 +650,32 @@
         ring.classList.remove('hover');
       });
     });
+  })();
+
+  // Hero fade-on-scroll: the background image and name dissolve as you scroll past the hero.
+  (function(){
+    var hero = document.getElementById('hero');
+    var inner = document.getElementById('heroInner');
+    var bg = document.getElementById('heroBg');
+    var ticking = false;
+
+    function update(){
+      var heroHeight = hero.offsetHeight;
+      var progress = Math.min(Math.max(window.scrollY / heroHeight, 0), 1);
+      inner.style.opacity = 1 - progress;
+      inner.style.transform = 'translateY(' + (progress * 40) + 'px)';
+      bg.style.opacity = 1 - progress;
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', function(){
+      if (!ticking){
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    update();
   })();
 </script>
 
