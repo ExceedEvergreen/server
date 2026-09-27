@@ -151,7 +151,8 @@
     background-size: cover;
     background-position: center;
     opacity: 0;
-    animation: heroSlide 30s ease-in-out infinite;
+    mix-blend-mode: screen;
+    animation: heroSlide 36s ease-in-out infinite;
     will-change: opacity, transform;
   }
   .hero-bg-layer.milkyway{
@@ -160,18 +161,18 @@
   }
   .hero-bg-layer.pillars{
     background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/Pillars_of_Creation_%28NIRCam_Image%29.jpg?width=2200');
-    animation-delay: -10s;
+    animation-delay: -12s;
   }
   .hero-bg-layer.blackhole{
     background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/Black_hole_-_Messier_87_crop_max_res.jpg?width=2200');
-    animation-delay: -20s;
+    animation-delay: -24s;
   }
   @keyframes heroSlide{
     0%    { opacity: 0;   transform: scale(1); }
-    4%    { opacity: 1; }
-    30%   { opacity: 1;   transform: scale(1.09); }
-    34%   { opacity: 0;   transform: scale(1.1); }
-    100%  { opacity: 0;   transform: scale(1.1); }
+    8%    { opacity: 1; }
+    30%   { opacity: 1;   transform: scale(1.07); }
+    45%   { opacity: 0;   transform: scale(1.12); }
+    100%  { opacity: 0;   transform: scale(1.12); }
   }
   @media (prefers-reduced-motion: reduce){
     .hero-bg-layer{ animation: none; opacity:0; }
@@ -493,6 +494,26 @@
     outline: 2px solid var(--oxblood);
     outline-offset: 2px;
   }
+
+  /* ---------- scroll reveal ---------- */
+  .reveal{
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .8s ease, transform .8s ease;
+  }
+  .reveal.is-visible{
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .shelf .book.reveal:nth-child(1){ transition-delay: 0s; }
+  .shelf .book.reveal:nth-child(2){ transition-delay: .1s; }
+  .shelf .book.reveal:nth-child(3){ transition-delay: .2s; }
+  .shelf .book.reveal:nth-child(4){ transition-delay: .3s; }
+  .shelf .book.reveal:nth-child(5){ transition-delay: .1s; }
+  .shelf .book.reveal:nth-child(6){ transition-delay: .2s; }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ transition: none; opacity: 1; transform: none; }
+  }
 </style>
 </head>
 <body>
@@ -519,9 +540,9 @@
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-inner" id="heroInner">
-    <div class="hero-eyebrow">New novel out this fall</div>
+    <div class="hero-eyebrow">The Universes Are Black Holes — a four-volume series</div>
     <h1 class="title">Chengyu Cao</h1>
-    <p class="hero-sub">Literary fiction about memory, migration, and the small rooms people build inside big lives.</p>
+    <p class="hero-sub">Rethinking space, time, and gravitation through the World Membrane Theory.</p>
     <div class="hero-cta">
       <a href="#books" class="btn btn-primary">See the books</a>
       <a href="#contact" class="btn btn-ghost">Get in touch</a>
@@ -531,26 +552,26 @@
 </section>
 
 <section id="bio">
-  <div class="wrap bio">
+  <div class="wrap bio reveal">
     <div class="portrait">Author photo</div>
     <div>
       <div class="section-head" style="border:none; padding:0; margin-bottom:24px;">
         <h2 class="section-title">About the author</h2>
       </div>
-      <p>Chengyu Cao grew up between two coastlines, which may explain why so much of the work returns to the idea of leaving. Trained first as a journalist, the shift into fiction came from wanting to sit longer with the questions the news cycle moved past too quickly.</p>
-      <p>Their debut novel was named a best book of the year by three major outlets and has been translated into twelve languages. When not writing, Chengyu Cao teaches a small fiction workshop and spends an unreasonable amount of time rearranging the same bookshelf.</p>
+      <p>Chengyu Cao is the author of the World Membrane Theory, a framework that reconsiders the basic definitions of space, time, and the boundaries between universes. [Add background here — education, research history, and what led to this work.]</p>
+      <p>Across four volumes, the work moves from foundational definitions through gravitation, dark matter, and dark energy, arriving at the theory's central claim: that universes themselves function as black holes. [Add further biographical detail here.]</p>
       <div class="facts">
         <div>
           <div class="fact-label">Based in</div>
-          <div class="fact-value">Portland, ME</div>
+          <div class="fact-value">[City, Country]</div>
         </div>
         <div>
           <div class="fact-label">Published since</div>
-          <div class="fact-value">2015</div>
+          <div class="fact-value">[Year]</div>
         </div>
         <div>
-          <div class="fact-label">Genre</div>
-          <div class="fact-value">Literary fiction</div>
+          <div class="fact-label">Field</div>
+          <div class="fact-value">Theoretical physics</div>
         </div>
       </div>
     </div>
@@ -559,31 +580,52 @@
 
 <section id="books">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <h2 class="section-title">Books</h2>
-      <div class="section-note">Four novels, in order of publication</div>
+      <div class="section-note">The Universes Are Black Holes — a four-volume series, plus standalone titles</div>
     </div>
     <div class="shelf">
-      <div class="book">
-        <div class="book-spine"><span>The Long Way Back</span></div>
-        <h3>The Long Way Back</h3>
-        <div class="meta">Novel · 2023</div>
-        <p>A daughter returns to the fishing town her mother fled, and finds the leaving wasn't as final as the family story made it sound.</p>
-        <a class="buy" href="#">Read an excerpt</a>
+      <div class="book reveal">
+        <div class="book-spine"><span>Vol. I<br>Space, Time and<br>World Membranes</span></div>
+        <h3>Space, Time and World Membranes</h3>
+        <div class="meta">Volume I · Cosmology</div>
+        <p>Lays the foundational definitions of space, time, and the boundaries — or membranes — between universes.</p>
+        <a class="buy" href="https://www.amazon.com/Universes-are-Black-Holes/dp/B0CLGN6XXZ" target="_blank" rel="noopener">View on Amazon</a>
       </div>
-      <div class="book">
-        <div class="book-spine"><span>Salt & Static</span></div>
-        <h3>Salt &amp; Static</h3>
-        <div class="meta">Novel · 2020</div>
-        <p>Two radio operators on opposite sides of a strait trade messages across a border that keeps changing shape without them.</p>
-        <a class="buy" href="#">Read an excerpt</a>
+      <div class="book reveal">
+        <div class="book-spine"><span>Vol. II<br>Gravitation in a<br>New Perspective</span></div>
+        <h3>Gravitation in a New Perspective</h3>
+        <div class="meta">Volume II · Cosmology</div>
+        <p>Re-evaluates how gravity works under the framework's new physical principles.</p>
+        <a class="buy" href="#">View on Amazon</a>
       </div>
-      <div class="book">
-        <div class="book-spine"><span>Low Tide Notebook</span></div>
-        <h3>Low Tide Notebook</h3>
-        <div class="meta">Essays · 2017</div>
-        <p>A collection on coastlines, inheritance, and the strange comfort of places that disappear and come back twice a day.</p>
-        <a class="buy" href="#">Read an excerpt</a>
+      <div class="book reveal">
+        <div class="book-spine"><span>Vol. III<br>Dark Energy and<br>Dark Matter Solved</span></div>
+        <h3>Dark Energy and Dark Matter Solved</h3>
+        <div class="meta">Volume III · Cosmology</div>
+        <p>Proposes solutions to the long-standing puzzles of dark matter and dark energy.</p>
+        <a class="buy" href="#">View on Amazon</a>
+      </div>
+      <div class="book reveal">
+        <div class="book-spine"><span>Vol. IV<br>Universes are<br>Black Holes</span></div>
+        <h3>Universes are Black Holes</h3>
+        <div class="meta">Volume IV · Cosmology</div>
+        <p>Closes the series by tying the framework back to its core premise — that universes function as black holes.</p>
+        <a class="buy" href="https://www.amazon.com/Universes-are-Black-Holes-IV/dp/B0H8828JFB" target="_blank" rel="noopener">View on Amazon</a>
+      </div>
+      <div class="book reveal">
+        <div class="book-spine"><span>[Standalone<br>Book Title]</span></div>
+        <h3>[Standalone Book Title]</h3>
+        <div class="meta">[Genre] · [Year]</div>
+        <p>[Add a short description of this book here.]</p>
+        <a class="buy" href="#">View on Amazon</a>
+      </div>
+      <div class="book reveal">
+        <div class="book-spine"><span>[Standalone<br>Book Title]</span></div>
+        <h3>[Standalone Book Title]</h3>
+        <div class="meta">[Genre] · [Year]</div>
+        <p>[Add a short description of this book here.]</p>
+        <a class="buy" href="#">View on Amazon</a>
       </div>
     </div>
   </div>
@@ -591,14 +633,14 @@
 
 <section id="contact">
   <div class="wrap">
-    <div class="contact-box">
+    <div class="contact-box reveal">
       <div>
         <h2>Get in touch</h2>
-        <p>For events, press, foreign rights, or just to say the last chapter wrecked you — reach out directly or use the form.</p>
+        <p>For interviews, speaking engagements, licensing questions, or thoughts on the theory itself — reach out directly or use the form.</p>
         <ul class="contact-list">
-          <li><span class="k">Email</span><a href="mailto:hello@chengyucao.com">hello@chengyucao.com</a></li>
-          <li><span class="k">Agent</span><span>Represented by Marlowe Lit</span></li>
-          <li><span class="k">Instagram</span><a href="#">@chengyucao</a></li>
+          <li><span class="k">Email</span><span>[Add contact email]</span></li>
+          <li><span class="k">Publisher</span><span>[Add publisher or imprint]</span></li>
+          <li><span class="k">Social</span><span>[Add social handle]</span></li>
         </ul>
       </div>
       <form class="inquire" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Sent';">
@@ -650,6 +692,24 @@
         ring.classList.remove('hover');
       });
     });
+  })();
+
+  // Scroll reveal: fade + rise each section in as it enters the viewport, once.
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)){
+      els.forEach(function(el){ el.classList.add('is-visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    els.forEach(function(el){ io.observe(el); });
   })();
 
   // Hero fade-on-scroll: the background image and name dissolve as you scroll past the hero.
